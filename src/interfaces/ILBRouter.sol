@@ -4,10 +4,10 @@ pragma solidity ^0.8.10;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-import {IJoeFactory} from "./IJoeFactory.sol";
+// import {IJoeFactory} from "./IJoeFactory.sol";
 import {ILBFactory} from "./ILBFactory.sol";
-import {ILBLegacyFactory} from "./ILBLegacyFactory.sol";
-import {ILBLegacyRouter} from "./ILBLegacyRouter.sol";
+// import {ILBLegacyFactory} from "./ILBLegacyFactory.sol";
+// import {ILBLegacyRouter} from "./ILBLegacyRouter.sol";
 import {ILBPair} from "./ILBPair.sol";
 import {ILBToken} from "./ILBToken.sol";
 import {IWNATIVE} from "./IWNATIVE.sol";
@@ -50,12 +50,12 @@ interface ILBRouter {
      * - V2_1: LB pair V2.1
      * - V2_2: LB pair V2.2 (current version)
      */
-    enum Version {
-        V1,
-        V2,
-        V2_1,
-        V2_2
-    }
+    // enum Version {
+    //     V1,
+    //     V2,
+    //     V2_1,
+    //     V2_2
+    // }
 
     /**
      * @dev The liquidity parameters, such as:
@@ -101,19 +101,18 @@ interface ILBRouter {
      */
     struct Path {
         uint256[] pairBinSteps;
-        Version[] versions;
         IERC20[] tokenPath;
     }
 
     function getFactory() external view returns (ILBFactory);
 
-    function getFactoryV2_1() external view returns (ILBFactory);
+    // function getFactoryV2_1() external view returns (ILBFactory);
 
-    function getLegacyFactory() external view returns (ILBLegacyFactory);
+    // function getLegacyFactory() external view returns (ILBLegacyFactory);
 
-    function getV1Factory() external view returns (IJoeFactory);
+    // function getV1Factory() external view returns (IJoeFactory);
 
-    function getLegacyRouter() external view returns (ILBLegacyRouter);
+    // function getLegacyRouter() external view returns (ILBLegacyRouter);
 
     function getWNATIVE() external view returns (IWNATIVE);
 

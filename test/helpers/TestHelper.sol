@@ -9,9 +9,6 @@ import "src/LBPair.sol";
 import "src/LBRouter.sol";
 import "src/LBQuoter.sol";
 import "src/interfaces/ILBRouter.sol";
-import "src/interfaces/IJoeRouter02.sol";
-import "src/interfaces/ILBLegacyRouter.sol";
-import "src/interfaces/ILBLegacyFactory.sol";
 import "src/LBToken.sol";
 import "src/libraries/math/Uint256x256Math.sol";
 import "src/libraries/Constants.sol";
@@ -78,12 +75,12 @@ abstract contract TestHelper is Test {
     LBPair internal pairImplementation;
 
     // Forked contracts
-    IJoeRouter02 internal routerV1;
-    IJoeFactory internal factoryV1;
-    ILBLegacyRouter internal legacyRouterV2;
-    ILBLegacyFactory internal legacyFactoryV2;
-    ILBRouter internal routerV2_1;
-    ILBFactory internal factoryV2_1;
+    // IJoeRouter02 internal routerV1;
+    // IJoeFactory internal factoryV1;
+    // ILBLegacyRouter internal legacyRouterV2;
+    // ILBLegacyFactory internal legacyFactoryV2;
+    // ILBRouter internal routerV2_1;
+    // ILBFactory internal factoryV2_1;
 
     function setUp() public virtual {
         wnative = WNATIVE(AvalancheAddresses.WNATIVE);
@@ -112,12 +109,12 @@ abstract contract TestHelper is Test {
         vm.label(address(taxToken), "taxToken");
 
         // Get forked contracts
-        routerV1 = IJoeRouter02(AvalancheAddresses.JOE_V1_ROUTER);
-        factoryV1 = IJoeFactory(AvalancheAddresses.JOE_V1_FACTORY);
-        legacyRouterV2 = ILBLegacyRouter(AvalancheAddresses.JOE_V2_ROUTER);
-        legacyFactoryV2 = ILBLegacyFactory(AvalancheAddresses.JOE_V2_FACTORY);
-        factoryV2_1 = ILBFactory(AvalancheAddresses.JOE_V2_1_FACTORY);
-        routerV2_1 = ILBRouter(AvalancheAddresses.JOE_V2_1_ROUTER);
+        // routerV1 = IJoeRouter02(AvalancheAddresses.JOE_V1_ROUTER);
+        // factoryV1 = IJoeFactory(AvalancheAddresses.JOE_V1_FACTORY);
+        // legacyRouterV2 = ILBLegacyRouter(AvalancheAddresses.JOE_V2_ROUTER);
+        // legacyFactoryV2 = ILBLegacyFactory(AvalancheAddresses.JOE_V2_FACTORY);
+        // factoryV2_1 = ILBFactory(AvalancheAddresses.JOE_V2_1_FACTORY);
+        // routerV2_1 = ILBRouter(AvalancheAddresses.JOE_V2_1_ROUTER);
 
         // Create factory
         factory = new LBFactory(DEV, DEV, DEFAULT_FLASHLOAN_FEE);
@@ -130,16 +127,11 @@ abstract contract TestHelper is Test {
 
         // Create router
         router =
-            new LBRouter(factory, factoryV1, legacyFactoryV2, legacyRouterV2, factoryV2_1, IWNATIVE(address(wnative)));
+            new LBRouter(factory, IWNATIVE(address(wnative)));
 
         // Create quoter
         quoter = new LBQuoter(
-            address(factoryV1),
-            address(legacyFactoryV2),
-            address(factoryV2_1),
             address(factory),
-            address(legacyRouterV2),
-            address(routerV2_1),
             address(router)
         );
 
@@ -150,29 +142,29 @@ abstract contract TestHelper is Test {
         vm.label(address(pairImplementation), "pairImplementation");
 
         // Label forks
-        vm.label(address(routerV1), "routerV1");
-        vm.label(address(factoryV1), "factoryV1");
-        vm.label(address(legacyRouterV2), "legacyRouterV2");
-        vm.label(address(legacyFactoryV2), "legacyFactoryV2");
+        // vm.label(address(routerV1), "routerV1");
+        // vm.label(address(factoryV1), "factoryV1");
+        // vm.label(address(legacyRouterV2), "legacyRouterV2");
+        // vm.label(address(legacyFactoryV2), "legacyFactoryV2");
 
         // Give approvals to routers
-        wnative.approve(address(routerV1), type(uint256).max);
-        usdc.approve(address(routerV1), type(uint256).max);
-        usdt.approve(address(routerV1), type(uint256).max);
-        wbtc.approve(address(routerV1), type(uint256).max);
-        weth.approve(address(routerV1), type(uint256).max);
-        link.approve(address(routerV1), type(uint256).max);
-        bnb.approve(address(routerV1), type(uint256).max);
-        taxToken.approve(address(routerV1), type(uint256).max);
+        // wnative.approve(address(routerV1), type(uint256).max);
+        // usdc.approve(address(routerV1), type(uint256).max);
+        // usdt.approve(address(routerV1), type(uint256).max);
+        // wbtc.approve(address(routerV1), type(uint256).max);
+        // weth.approve(address(routerV1), type(uint256).max);
+        // link.approve(address(routerV1), type(uint256).max);
+        // bnb.approve(address(routerV1), type(uint256).max);
+        // taxToken.approve(address(routerV1), type(uint256).max);
 
-        wnative.approve(address(legacyRouterV2), type(uint256).max);
-        usdc.approve(address(legacyRouterV2), type(uint256).max);
-        usdt.approve(address(legacyRouterV2), type(uint256).max);
-        wbtc.approve(address(legacyRouterV2), type(uint256).max);
-        weth.approve(address(legacyRouterV2), type(uint256).max);
-        link.approve(address(legacyRouterV2), type(uint256).max);
-        bnb.approve(address(legacyRouterV2), type(uint256).max);
-        taxToken.approve(address(legacyRouterV2), type(uint256).max);
+        // wnative.approve(address(legacyRouterV2), type(uint256).max);
+        // usdc.approve(address(legacyRouterV2), type(uint256).max);
+        // usdt.approve(address(legacyRouterV2), type(uint256).max);
+        // wbtc.approve(address(legacyRouterV2), type(uint256).max);
+        // weth.approve(address(legacyRouterV2), type(uint256).max);
+        // link.approve(address(legacyRouterV2), type(uint256).max);
+        // bnb.approve(address(legacyRouterV2), type(uint256).max);
+        // taxToken.approve(address(legacyRouterV2), type(uint256).max);
 
         wnative.approve(address(router), type(uint256).max);
         usdc.approve(address(router), type(uint256).max);

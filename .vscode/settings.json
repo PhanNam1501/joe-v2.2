@@ -2,5 +2,6 @@
     "solidity.formatter": "forge",
     "slither.solcPath": "",
     "slither.hiddenDetectors": [],
-    "coverage-gutters.showLineCoverage": true
+    "coverage-gutters.showLineCoverage": true,
+    "solidity.compileUsingRemoteVersion": "v0.8.20+commit.a1b79de6"
 }
